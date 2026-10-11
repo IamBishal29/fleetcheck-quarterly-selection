@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FleetCheck.Selection/FleetCheck.Selection.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FleetCheck.Tests/FleetCheck.Tests.csproj" />
+  </Folder>
+</Solution>
