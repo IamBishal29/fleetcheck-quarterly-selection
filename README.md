@@ -59,8 +59,40 @@ on every run. So instead of real randomness, the selection uses **repeatable
 ---
 
 ## Project structure
+fleetcheck-quarterly-selection/
+├── README.md
+├── src/
+│   └── FleetCheck.Selection/
+│       └── VehicleSelection.cs        # the core logic
+└── tests/
+└── FleetCheck.Tests/
+└── QuarterlySelectorTests.cs  # the tests
 
 
-## Run
-```bash
+---
+
+## Running the tests
+
+From the root folder:
+
+Run in cmd:
 dotnet test
+
+
+## Time and space complexity
+
+Let **n** = the number of active vehicles for the company.
+
+**Time: O(n log n)**
+- Cleaning the input (removing blanks, de-duplicating) is a single pass: O(n).
+- Building the seed hashes the joined list once: O(n).
+- Scoring each vehicle is one hash per vehicle: O(n).
+- The dominant cost is **sorting** the vehicles by their score: **O(n log n)**.
+
+So overall the algorithm is **O(n log n)**, driven by the sort. At 200,000
+vehicles this is comfortably fast (a few hundred thousand simple operations).
+
+## One edge case I found that the brief does not mention
+## A non-zero percentage that rounds down to zero (e.g. 10% of 3 vehicles = 0.3)
+**The brief doesn't say what should happen. My choice: always pick at least one, because a surprise-inspection regime that picks nobody defeats the purpose. (Already handled and tested.)**
+
